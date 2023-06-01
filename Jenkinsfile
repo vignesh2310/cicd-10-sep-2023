@@ -22,5 +22,11 @@ pipeline {
                 sh 'mvn verify -DskipUnitTests' // mvn verify=integration testing to ensure quality criteria are met
             }
         }
+
+        stage('maven build') {
+            steps {
+                sh 'mvn clean install' // clean=deletes previous compiled files(target directory)
+            }                          // install=builds project & install project files(.jar,.war) in local repo
+        }
     }
 }
