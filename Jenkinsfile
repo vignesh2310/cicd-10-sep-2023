@@ -74,7 +74,7 @@ pipeline {
 
         stage('push to dockerhub') {
             steps {
-                   sh 'docker login -u vignesh22310 -p ${dockerhub-docker-cred}'
+                   sh 'docker login -u vignesh22310 -p ${docker-cred}'
                    sh 'docker push vignesh22310/$JOB_NAME:v1.$BUILD_ID'
                    sh 'docker push vignesh22310/$JOB_NAME:latest'
             }
