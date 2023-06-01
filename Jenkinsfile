@@ -37,9 +37,30 @@ pipeline {
             }
         }
 
-        stage('quality gates-sonar webhook') {
+        stage('quality gates-sonar webhook') { // set sonar-webhook to respond back reports to jenkins
             steps {
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonartoken'
+            }
+        }
+
+        stage('nexus artifact upload') {
+            steps {
+                nexusArtifactUploader artifacts:
+                [
+                    [
+                        artifactId: 'springboot',
+                        classifier: '',
+                        file: 'target/Uber.jar',
+                        type: 'jar'
+                    ]
+                ], 
+                 credentialsId: 'nexus-cred',
+                 groupId: 'com.example',
+                 nexusUrl: '172.31.30.75:8081',
+                 nexusVersion: 'nexus2',
+                 protocol: 'http',
+                 repository: 'spring-release', 
+                 version: '1.0.0'
             }
         }
     }
