@@ -46,14 +46,14 @@ pipeline {
         stage('nexus artifact upload') {
             steps {
                 nexusArtifactUploader artifacts:
-                 [
+                [
                     [
                         artifactId: 'springboot',
                          classifier: '',
                           file: 'target/Uber.jar',
                            type: 'jar'
-                           ]
-                           ],
+                    ]
+                ],
                             credentialsId: 'nexus-cred',
                              groupId: 'com.example',
                               nexusUrl: '13.59.5.165:8081',
