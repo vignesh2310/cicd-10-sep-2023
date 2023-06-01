@@ -26,7 +26,15 @@ pipeline {
         stage('maven build') {
             steps {
                 sh 'mvn clean install' // clean=deletes previous compiled files(target directory)
-            }                          // install=builds project & install project files(.jar,.war) in local repo
+            }                          // install=build&compile pom.xml file into (.jar, .war) files in local repo
+        }
+
+        stage('sonarqube analysis') {
+            steps {
+                withSonarQubeEnv(credentialsId: 'sonartoken') {
+                   sh 'mvn clean package sonar:sonar' // package=build&compile pom.xml file into (.jar, .war) files into target folder
+                }
+            }
         }
     }
 }
