@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    tools {
-        jdk 'java8'
-        maven 'maven3'
-    }
+    tools { // declaring tools for jenkins, without declaring jenkins can't find maven.
+        jdk 'java8' // name given in global tool configuration
+        maven 'maven3' // name given in global tool configuration
+    }                  // jdk11=jenkins(default-jdk), jdk8=(open)->In pom.xml->java.version=8
     stages {
         stage('git checkout') {
             steps {
@@ -13,7 +13,13 @@ pipeline {
         
         stage('unit test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn test' // mvn test=run test cases of project
+            }
+        }
+
+        stage('integration test') {
+            steps {
+                sh 'mvn verify -DskipUnitTests' // mvn verify=integration testing to ensure quality criteria are met
             }
         }
     }
