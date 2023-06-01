@@ -31,7 +31,7 @@ pipeline {
 
         stage('sonarqube analysis') {
             steps {
-                withSonarQubeEnv('sonartoken') {
+                withSonarQubeEnv('sonarserver') {
                    sh 'mvn clean package sonar:sonar' // package=build&compile pom.xml file into (.jar, .war) files into target folder
                 }
             }
