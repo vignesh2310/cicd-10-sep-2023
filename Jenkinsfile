@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         jdk 'java8'
-        maven 'maven3.8'
+        maven 'maven3'
     }
     stages {
         stage('git checkout') {
@@ -13,7 +13,7 @@ pipeline {
         
         stage('unit test') {
             steps {
-                sh 'mvn clean test'
+                sh 'mvn test'
             }
         }
     }
