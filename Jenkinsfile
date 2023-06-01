@@ -72,7 +72,7 @@ pipeline {
             }                                             //vignesh22310/cicd-project:latest
         }
 
-        stage(push to dockerhub) {
+        stage('push to dockerhub') {
             steps {
                 withCredentials([string(credentialsId: 'docker-token', variable: 'dockerhub-cred')]) {
                    sh 'docker login -u vignesh22310 -p ${dockerhub-cred}'
