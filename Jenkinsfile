@@ -48,19 +48,27 @@ pipeline {
                 nexusArtifactUploader artifacts: 
                 [
                     [
-                        artifactId: 'springboot',
+                        artifactId: 'springboot', // artifact id in pom.xml
                         classifier: '',
-                        file: 'target/Uber.jar',
-                        type: 'jar'
+                        file: 'target/Uber.jar', // file path in jenkins server
+                        type: 'jar' 
                     ]
                 ],
-                        credentialsId: 'nexus-cred',
-                        groupId: 'com.example',
-                        nexusUrl: '13.59.5.165:8081',
+                        credentialsId: 'nexus-cred', 
+                        groupId: 'com.example', // group id in pom.xml
+                        nexusUrl: '13.59.5.165:8081', // public.ip with port 8081
                         nexusVersion: 'nexus3',
                         protocol: 'http',
-                        repository: 'spring-release',
-                        version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"   
+                        repository: 'spring-release', // nexus maven(hosted) repo name
+                        version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}" 
+            }     //if version=1.0(defined)=one time success, next upload with version can't done=error
+        }         //so,declare build (env,build timestamp) = declare environment variables
+
+        stage('build docker image') {
+            steps {
+                sh 'docker build -t $JOB_NAME:v1.$BUILD_ID .'
+                sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vignesh22310/$JOB_NAME:v1.$BUILD_ID'
+                sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vignesh22310/$JOB_NAME:latest'
             }
         }
     }
