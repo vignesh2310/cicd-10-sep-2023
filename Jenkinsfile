@@ -29,11 +29,17 @@ pipeline {
             }                          // install=build&compile pom.xml file into (.jar, .war) files in local repo
         }
 
-        stage('sonarqube analysis') {
+        stage('sonarqube-server analysis') {
             steps {
-                withSonarQubeEnv('sonarserver') {
+                withSonarQubeEnv('sonarserver') { // sonarserver=>name in configure=>SonarQube servers
                    sh 'mvn clean package sonar:sonar' // package=build&compile pom.xml file into (.jar, .war) files into target folder
                 }
+            }
+        }
+
+        stage('quality gates-sonar webhook') {
+            steps {
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonartoken'
             }
         }
     }
