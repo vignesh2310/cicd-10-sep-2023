@@ -69,6 +69,16 @@ pipeline {
                 sh 'docker build -t $JOB_NAME:v1.$BUILD_ID .'
                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vignesh22310/$JOB_NAME:v1.$BUILD_ID'
                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vignesh22310/$JOB_NAME:latest'
+            }                                             //vignesh22310/cicd-project:latest
+        }
+
+        stage(push to dockerhub) {
+            steps {
+                withCredentials([string(credentialsId: 'docker-token', variable: 'dockerhub-cred')]) {
+                   sh 'docker login -u vignesh22310 -p ${dockerhub-cred}'
+                   sh 'docker push vignesh22310/$JOB_NAME:v1.$BUILD_ID'
+                   sh 'docker push vignesh22310/$JOB_NAME:latest'
+                }
             }
         }
     }
