@@ -56,7 +56,7 @@ pipeline {
                 ], 
                  credentialsId: 'nexus-cred',
                  groupId: 'com.example',
-                 nexusUrl: '172.31.30.75:8081',
+                 nexusUrl: '13.59.5.165:8081',
                  nexusVersion: 'nexus2',
                  protocol: 'http',
                  repository: 'spring-release', 
