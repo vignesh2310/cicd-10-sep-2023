@@ -54,7 +54,7 @@ pipeline {
                         type: 'jar' 
                     ]
                 ],
-                        credentialsId: 'nexus-cred', 
+                        credentialsId: 'nexus-ci-cd', 
                         groupId: 'com.example', // group id in pom.xml
                         nexusUrl: '18.188.209.223:8081', // public.ip with port 8081
                         nexusVersion: 'nexus3',
