@@ -69,7 +69,7 @@ pipeline {
                 sh 'docker build -t $JOB_NAME:v1.$BUILD_ID .'
                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vignesh22310/$JOB_NAME:v1.$BUILD_ID'
                 sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vignesh22310/$JOB_NAME:latest'
-            }                                             //vignesh22310/cicd-project:latest
+            }                                      //output=vignesh22310/cicd-project:latest
         }
 
         stage('push to dockerhub') {
