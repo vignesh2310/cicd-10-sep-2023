@@ -56,7 +56,7 @@ pipeline {
                 ],
                         credentialsId: 'nexus-cicd', 
                         groupId: 'com.example', // group id in pom.xml
-                        nexusUrl: '18.188.209.223:8081', // public.ip with port 8081
+                        nexusUrl: '18.222.48.92:8081', // public.ip with port 8081
                         nexusVersion: 'nexus3',
                         protocol: 'http',
                         repository: 'spring-release', // nexus maven(hosted) repo name
@@ -73,10 +73,13 @@ pipeline {
         }
 
         stage('push to dockerhub') {
-            steps {
-                   sh 'docker login -u vignesh22310 -p ${docker-cred}'
-                   sh 'docker push vignesh22310/$JOB_NAME:v1.$BUILD_ID'
-                   sh 'docker push vignesh22310/$JOB_NAME:latest'
+            withCredentials([string(credentialsId: 'docker-cicd', variable: 'docker-cred')]) {
+    
+                steps {
+                     sh 'docker login -u vignesh22310 -p ${docker-cred}'
+                     sh 'docker push vignesh22310/$JOB_NAME:v1.$BUILD_ID'
+                     sh 'docker push vignesh22310/$JOB_NAME:latest'
+                }
             }
         }
     }
