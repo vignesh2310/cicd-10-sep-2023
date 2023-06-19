@@ -1,4 +1,4 @@
-FROM maven as build
+FROM maven as build // build image
 WORKDIR /uber
 COPY . .
 RUN mvn install
