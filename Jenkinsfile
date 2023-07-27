@@ -54,13 +54,13 @@ pipeline {
                         type: 'jar' 
                     ]
                 ],
-                        credentialsId: 'nexus-cicd', 
+                        credentialsId: 'nexustopken', 
                         groupId: 'com.example', // group id in pom.xml
-                        nexusUrl: '18.222.48.92:8081', // public.ip with port 8081
+                        nexusUrl: '54.164.40.71:8081', // public.ip with port 8081
                         nexusVersion: 'nexus3',
                         protocol: 'http',
-                        repository: 'spring-release', // nexus maven(hosted) repo name
-                        version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}" 
+                        repository: 'release', // nexus maven(hosted) repo name
+                        version: "1.0.0" 
             }     //if version=1.0(defined)=one time success, next upload with version can't done=error
         }         //so,declare build (env,build timestamp) = declare environment variables
 
