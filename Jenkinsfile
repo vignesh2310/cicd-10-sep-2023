@@ -39,7 +39,7 @@ pipeline {
 
         stage('quality gates-sonar webhook') { // set sonar-webhook to respond back reports to jenkins
             steps {
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonartoken'
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonartk'
             }
         }
 
