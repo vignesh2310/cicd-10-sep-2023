@@ -45,7 +45,7 @@ pipeline {
 
         stage('nexus artifact upload') {
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'springboot', classifier: '', file: 'target/Uber.jar', type: 'jar']], credentialsId: 'nexustopken', groupId: 'com.example', nexusUrl: '54.164.40.71:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'release', version: '1.0.0'
+                nexusArtifactUploader artifacts: [[artifactId: 'springboot', classifier: '', file: 'target/Uber.jar', type: 'jar']], credentialsId: 'nexustopken', groupId: 'com.example', nexusUrl: '54.164.40.71:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'release', version: '1.0.0'
             }     //if version=1.0(defined)=one time success, next upload with version can't done=error
         }         //so,declare build (env,build timestamp) = declare environment variables
 
