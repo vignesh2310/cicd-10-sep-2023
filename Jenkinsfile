@@ -56,7 +56,7 @@ pipeline {
                 ],
                         credentialsId: 'nexustopken', 
                         groupId: 'com.example', // group id in pom.xml
-                        nexusUrl: '54.164.40.71:8081', // public.ip with port 8081
+                        nexusUrl: '54.164.40.71:8081/', // public.ip with port 8081
                         nexusVersion: 'nexus3',
                         protocol: 'http',
                         repository: 'release', // nexus maven(hosted) repo name
