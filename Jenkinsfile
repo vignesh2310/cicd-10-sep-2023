@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools { // declaring tools for jenkins, without declaring jenkins can't find maven.
-        jdk 'java8' // name given in global tool configuration
+        jdk 'java11' // name given in global tool configuration
         maven 'maven3' // name given in global tool configuration
     }                  // jdk11=jenkins(default-jdk), jdk8=(open)->In pom.xml->java.version=8
     stages {
