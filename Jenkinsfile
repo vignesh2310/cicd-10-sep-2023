@@ -59,7 +59,7 @@ pipeline {
                            nexusVersion: 'nexus3',
                             protocol: 'http',
                              repository: 'artifact',
-                              version: '1.0.0'
+                              version: '${BUILD_NUMBER}-${BUILD_ID}'
             }
         }
     }   
