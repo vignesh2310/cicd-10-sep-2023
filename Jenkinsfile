@@ -19,7 +19,13 @@ pipeline {
 
         stage ("integration testing") { // performs integration test, This command builds the project, runs all the test cases to ensure quality criteria are met
             steps {
-                sh "mvn verify"
+                sh "mvn verify" // creates jar files
+            }
+        }
+
+        stage ("build") { // clean   - deletes the existing target directory
+            steps {       // install - build and compile pom.xml file into .jar, .war files and puts in local repo
+                sh "mvn clean install" // 
             }
         }
     }   
