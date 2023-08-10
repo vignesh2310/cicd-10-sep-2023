@@ -37,11 +37,29 @@ pipeline {
             }
         }
 
-        stage("Quality Gate") {
+        stage("Quality Gate") { // provide sonartoken & create webhooks for sonar quality gates
             steps {
               timeout(time: 3, unit: 'MINUTES') {
                 waitForQualityGate abortPipeline: true
               }
+            }
+        }
+
+        stage ("nexus upload") {
+            steps {
+                nexusArtifactUploader artifacts: [
+                    [artifactId: 'springboot',
+                     classifier: '',
+                      file: 'target/Uber.jar',
+                       type: 'jar']
+                       ],
+                        credentialsId: 'nexus-cred',
+                         groupId: 'com.example',
+                          nexusUrl: '107.22.79.90:8081',
+                           nexusVersion: 'nexus3',
+                            protocol: 'http',
+                             repository: 'artifact',
+                              version: '1.0.0'
             }
         }
     }   
