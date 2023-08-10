@@ -59,7 +59,15 @@ pipeline {
                            nexusVersion: 'nexus3',
                             protocol: 'http',
                              repository: 'artifact',
-                              version: '${BUILD_NUMBER}-${BUILD_ID}'
+                              version: '${BUILD_NUMBER}'
+            }
+        }
+
+        stage ("build image") {
+            steps {
+                sh "docker build -t $JOB_NAME-$BUILD_ID ."
+                sh "docker image tag $JOB_NAME-$BUILD_ID vignesh22310/$JOB_NAME-$BUILD_ID"
+                sh "docker image tag $JOB_NAME-$BUILD_ID vignesh22310/$JOB_NAME-latest"
             }
         }
     }   
