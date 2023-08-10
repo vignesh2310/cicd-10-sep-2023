@@ -32,7 +32,15 @@ pipeline {
         stage ("build & sonarqube analysis") { // clean   - deletes the existing target directory
             steps {                            // package - build and compile pom.xml file into .jar, .war files into target folder
               withSonarQubeEnv("sonarserver") { // sonarserver - name provided in system/sonarqube servers in jenkins
-                sh 'mvn clean package sonar:sonar' //
+                sh 'mvn clean package sonar:sonar' // again new target folder created along with jar files and sonar directory 
+              }
+            }
+        }
+
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 3, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
               }
             }
         }
