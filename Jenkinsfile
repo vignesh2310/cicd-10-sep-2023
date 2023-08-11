@@ -73,8 +73,8 @@ pipeline {
 
         stage("image to hub") {
             steps {
-                withCredentials([string(credentialsId: 'docker', variable: 'docker-cred')]) {
-                sh 'docker login -u vignesh22310 -p $docker-cred'
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
+                sh 'docker login -u vignesh22310 -p ${dockerhub}'
                 sh "docker push vignesh22310/$JOB_NAME-$BUILD_ID"
                 }
             }
