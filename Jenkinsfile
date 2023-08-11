@@ -76,6 +76,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'dockerpasswd-cred', variable: 'dockerhub-cred')]) {
                     sh "docker login -u vignesh22310 -p ${dockerpasswd-cred}"
                     sh "docker push vignesh22310/$JOB_NAME-$BUILD_ID"
+                }
             }
         }
     }   
